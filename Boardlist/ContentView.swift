@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let boards: [Boards] = Bundle.main.decode("boards.json")
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text(boards[0].brand)
         }
         .padding()
     }
