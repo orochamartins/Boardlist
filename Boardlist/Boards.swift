@@ -18,6 +18,7 @@ struct Boards: Codable, Identifiable {
     let material: String
     let finSystem: String
     let finType: String
+    let boardType: String
     let tailType: String
     let difficulty: [Int]
     let waveRange: [Int]

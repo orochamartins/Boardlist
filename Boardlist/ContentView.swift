@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     
     let boards: [Boards] = Bundle.main.decode("boards.json")
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [GridItem(.adaptive(minimum: 300))]
+    
+    @State private var searchText = ""
     
     var body: some View {
         NavigationView {
@@ -23,24 +25,30 @@ struct ContentView: View {
                             NavigationLink {
                                 
                             } label: {
-                                VStack {
-                                    Circle()
+                                VStack(alignment: .leading, spacing: 14) {
+                                    RoundedRectangle(cornerRadius: 8)
                                         .fill(.blue)
-                                        .frame(width: 100, height: 100)
-                                        .padding()
-                                    VStack(alignment: .leading, spacing: 6) {
-                                        Text(board.brand)
-                                            .font(.caption)
-                                            .foregroundColor(.primary.opacity(0.5))
-                                        Text(board.model)
-                                            .font(.headline)
-                                            .foregroundColor(.white)
+                                        .frame(height: 100)
+                                        .padding([.horizontal, .top])
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 6) {
+                                            Text(board.brand)
+                                                .font(.headline)
+                                                .foregroundColor(.primary.opacity(0.5))
+                                            Text(board.model)
+                                                .font(.title)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.white)
+                                        }
+                                        
+                                        Spacer()
                                     }
                                     .frame(maxWidth: .infinity)
-                                    .padding(.bottom)
+                                    .padding([.horizontal, .bottom])
                                 }
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.white.opacity(0.3)))
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
+                                .padding(.bottom, 8)
                             }
                         }
                     }
@@ -58,6 +66,7 @@ struct ContentView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
+        .searchable(text: $searchText, prompt: "Find your board here")
     }
 }
 
