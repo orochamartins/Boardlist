@@ -14,6 +14,15 @@ struct ContentView: View {
     
     @State private var searchText = ""
     
+    var searchResults: [Boards] {
+        if searchText.isEmpty {
+            return boards
+        } else {
+            return boards.filter { $0.brand.localizedCaseInsensitiveContains(searchText) || $0.model.localizedCaseInsensitiveContains(searchText) || $0.material.localizedCaseInsensitiveContains(searchText) || $0.finType.localizedCaseInsensitiveContains(searchText) || $0.boardType.localizedCaseInsensitiveContains(searchText) || $0.tailType.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -21,15 +30,39 @@ struct ContentView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns) {
-                        ForEach(boards) { board in
+                        ForEach(searchResults) { board in
                             NavigationLink {
                                 
                             } label: {
                                 VStack(alignment: .leading, spacing: 14) {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(.blue)
-                                        .frame(height: 100)
+                                    
+                                    //Board image with content
+                                    
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(.blue)
+                                            .frame(height: 100)
+                                            .padding([.horizontal, .top])
+                                        
+                                        VStack(alignment: .trailing) {
+                                            Spacer()
+                                            HStack {
+                                                Spacer()
+                                                Text(board.boardType)
+                                                    .font(.footnote)
+                                                    .foregroundColor(.white)
+                                                    .padding(.vertical, 6)
+                                                    .padding(.horizontal, 10)
+                                                    .background(.ultraThinMaterial)
+                                                    .cornerRadius(16)
+                                            }
+                                            .padding(6)
+                                        }
                                         .padding([.horizontal, .top])
+                                    }
+                                    
+                                    //Board brand, model and rating
+                                    
                                     HStack {
                                         VStack(alignment: .leading, spacing: 6) {
                                             Text(board.brand)
@@ -39,6 +72,7 @@ struct ContentView: View {
                                                 .font(.title)
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.white)
+                                            RatingView(rating: board.ratingTotal)
                                         }
                                         
                                         Spacer()
@@ -66,7 +100,7 @@ struct ContentView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .searchable(text: $searchText, prompt: "Find your board here")
+        .searchable(text: $searchText.animation(), prompt: "Find your board here")
     }
 }
 

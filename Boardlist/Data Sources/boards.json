@@ -16,7 +16,7 @@
     "waveRange": [0, 2],
     "userReview": [
         {
-            "rating": 4,
+            "rating": 1,
             "location": "Byron Bay, Australia",
             "description": "Awesome board! Really fast but without losing control."
             
@@ -51,7 +51,7 @@
     "waveRange": [0, 2],
     "userReview": [
         {
-            "rating": 4,
+            "rating": 5,
             "location": "Byron Bay, Australia",
             "description": "Awesome board! Really fast but without losing control."
             
@@ -121,7 +121,7 @@
     "waveRange": [0, 2],
     "userReview": [
         {
-            "rating": 4,
+            "rating": 2,
             "location": "Byron Bay, Australia",
             "description": "Awesome board! Really fast but without losing control."
             

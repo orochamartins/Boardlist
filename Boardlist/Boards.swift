@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Boards: Codable, Identifiable {
     let id: Int
@@ -23,6 +24,11 @@ struct Boards: Codable, Identifiable {
     let difficulty: [Int]
     let waveRange: [Int]
     let userReview: [UserReview]
+    
+    var ratingTotal: Int {
+        let total = userReview.reduce(0) { $0 + $1.rating }
+        return total / userReview.count
+    }
     
     struct UserReview: Codable {
         let rating: Int
