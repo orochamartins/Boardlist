@@ -73,6 +73,7 @@ struct ContentView: View {
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.white)
                                             RatingView(rating: board.ratingTotal)
+                                            GaugeView(value: board.difficulty)
                                         }
                                         
                                         Spacer()
