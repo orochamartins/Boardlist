@@ -1,13 +1,13 @@
 //
-//  GaugeView.swift
+//  WaveGaugeView.swift
 //  Boardlist
 //
-//  Created by Renato Martins on 04/09/2023.
+//  Created by Renato Martins on 05/09/2023.
 //
 
 import SwiftUI
 
-struct GaugeView: View {
+struct WaveGaugeView: View {
     
     let value: [Int]
     
@@ -41,7 +41,7 @@ struct GaugeView: View {
                 }
                 .rotationEffect(.degrees(-14))
                 
-                Image(systemName: "figure.surfing")
+                Image(systemName: "water.waves")
                     .foregroundColor(.white)
             }
             
@@ -72,22 +72,22 @@ struct GaugeView: View {
     func getTitle(from value: Int) -> String {
         switch value {
         case 1:
-            return "Beginner"
+            return "Knee"
         case 2:
-            return "Intermediate"
+            return "Head height"
         case 3:
-            return "Advanced"
+            return "Overhead"
         case 4:
-           return "Professional"
+           return "Double+"
         default:
            return "Not disclosed"
         }
     }
 }
 
-struct GaugeView_Previews: PreviewProvider {
+struct WaveGaugeView_Previews: PreviewProvider {
     static var previews: some View {
-        GaugeView(value: [1, 4])
+        WaveGaugeView(value: [1, 4])
             .preferredColorScheme(.dark)
     }
 }

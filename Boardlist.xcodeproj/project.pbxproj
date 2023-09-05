@@ -16,6 +16,8 @@
 		7F773E8F2AA68CCA003B2E3E /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F773E8E2AA68CCA003B2E3E /* GaugeView.swift */; };
 		7F7AD6BC2A9FE99000D424A1 /* Boards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AD6BB2A9FE99000D424A1 /* Boards.swift */; };
 		7F7AD6BE2A9FECE900D424A1 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AD6BD2A9FECE800D424A1 /* Bundle-Decodable.swift */; };
+		7F7B55802AA7DD6B00AE3299 /* WaveGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7B557F2AA7DD6B00AE3299 /* WaveGaugeView.swift */; };
+		7F7B55822AA7E7CD00AE3299 /* PowerGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7B55812AA7E7CD00AE3299 /* PowerGaugeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		7F773E8E2AA68CCA003B2E3E /* GaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
 		7F7AD6BB2A9FE99000D424A1 /* Boards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boards.swift; sourceTree = "<group>"; };
 		7F7AD6BD2A9FECE800D424A1 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
+		7F7B557F2AA7DD6B00AE3299 /* WaveGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveGaugeView.swift; sourceTree = "<group>"; };
+		7F7B55812AA7E7CD00AE3299 /* PowerGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerGaugeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +67,10 @@
 			children = (
 				7F68DEFB2A9E9FB100C1EABD /* BoardlistApp.swift */,
 				7F68DEFD2A9E9FB100C1EABD /* ContentView.swift */,
+				7F7B55812AA7E7CD00AE3299 /* PowerGaugeView.swift */,
 				7F74510D2AA50A6300403FBC /* RatingView.swift */,
 				7F773E8E2AA68CCA003B2E3E /* GaugeView.swift */,
+				7F7B557F2AA7DD6B00AE3299 /* WaveGaugeView.swift */,
 				7F7AD6BB2A9FE99000D424A1 /* Boards.swift */,
 				7F773E902AA68CE4003B2E3E /* Components */,
 				7F7AD6C02A9FEF8200D424A1 /* Data Sources */,
@@ -177,12 +183,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F7B55822AA7E7CD00AE3299 /* PowerGaugeView.swift in Sources */,
 				7F68DEFE2A9E9FB100C1EABD /* ContentView.swift in Sources */,
 				7F68DEFC2A9E9FB100C1EABD /* BoardlistApp.swift in Sources */,
 				7F7AD6BC2A9FE99000D424A1 /* Boards.swift in Sources */,
 				7F74510E2AA50A6300403FBC /* RatingView.swift in Sources */,
 				7F773E8F2AA68CCA003B2E3E /* GaugeView.swift in Sources */,
 				7F7AD6BE2A9FECE900D424A1 /* Bundle-Decodable.swift in Sources */,
+				7F7B55802AA7DD6B00AE3299 /* WaveGaugeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

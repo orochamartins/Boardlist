@@ -63,20 +63,28 @@ struct ContentView: View {
                                     
                                     //Board brand, model and rating
                                     
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 6) {
-                                            Text(board.brand)
-                                                .font(.headline)
-                                                .foregroundColor(.primary.opacity(0.5))
-                                            Text(board.model)
-                                                .font(.title)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.white)
-                                            RatingView(rating: board.ratingTotal)
+                                    VStack(alignment: .leading, spacing: 6) {
+                                        Text(board.brand)
+                                            .font(.headline)
+                                            .fontWeight(.regular)
+                                            .foregroundColor(.primary.opacity(0.5))
+                                        Text(board.model)
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                               .foregroundColor(.white)
+                                        RatingView(rating: board.ratingTotal)
+                                            
+                                        Divider()
+                                            .frame(height: 1.4)
+                                            .overlay(.ultraThinMaterial)
+                                            .padding(.vertical)
+                                            
+                                        HStack(alignment: .center) {
                                             GaugeView(value: board.difficulty)
+                                            WaveGaugeView(value: board.waveRange)
+                                            PowerGaugeView(value: board.powerRange)
                                         }
-                                        
-                                        Spacer()
+                                        .frame(maxWidth: .infinity)
                                     }
                                     .frame(maxWidth: .infinity)
                                     .padding([.horizontal, .bottom])

@@ -13,7 +13,8 @@
     "boardType": "Shortboard",
     "tailType": "Squashed",
     "difficulty": [1, 3],
-    "waveRange": [0, 2],
+    "waveRange": [1, 2],
+    "powerRange": [1, 2],
     "userReview": [
         {
             "rating": 1,
@@ -48,7 +49,8 @@
     "boardType": "Midlength",
     "tailType": "Squashed",
     "difficulty": [2, 4],
-    "waveRange": [0, 2],
+    "waveRange": [1, 2],
+    "powerRange": [1, 3],
     "userReview": [
         {
             "rating": 5,
@@ -83,7 +85,8 @@
     "boardType": "Shortboard",
     "tailType": "Squashed",
     "difficulty": [1, 4],
-    "waveRange": [0, 2],
+    "waveRange": [1, 2],
+    "powerRange": [1, 3],
     "userReview": [
         {
             "rating": 4,
@@ -118,7 +121,8 @@
     "boardType": "Midlength",
     "tailType": "Squashed",
     "difficulty": [1, 3],
-    "waveRange": [0, 2],
+    "waveRange": [1, 3],
+    "powerRange": [1, 2],
     "userReview": [
         {
             "rating": 2,
@@ -153,7 +157,8 @@
     "boardType": "Longboard",
     "tailType": "Squashed",
     "difficulty": [1, 2],
-    "waveRange": [0, 2],
+    "waveRange": [1, 2],
+    "powerRange": [1, 2],
     "userReview": [
         {
             "rating": 4,
@@ -187,8 +192,9 @@
     "finType": "Twin, 2+1",
     "boardType": "Shortboard",
     "tailType": "Squashed",
-    "difficulty": [0, 4],
-    "waveRange": [0, 2],
+    "difficulty": [1, 4],
+    "waveRange": [1, 3],
+    "powerRange": [1, 3],
     "userReview": [
         {
             "rating": 4,

@@ -23,6 +23,7 @@ struct Boards: Codable, Identifiable {
     let tailType: String
     let difficulty: [Int]
     let waveRange: [Int]
+    let powerRange: [Int]
     let userReview: [UserReview]
     
     var ratingTotal: Int {

@@ -1,13 +1,13 @@
 //
-//  GaugeView.swift
+//  PowerGaugeView.swift
 //  Boardlist
 //
-//  Created by Renato Martins on 04/09/2023.
+//  Created by Renato Martins on 05/09/2023.
 //
 
 import SwiftUI
 
-struct GaugeView: View {
+struct PowerGaugeView: View {
     
     let value: [Int]
     
@@ -41,7 +41,7 @@ struct GaugeView: View {
                 }
                 .rotationEffect(.degrees(-14))
                 
-                Image(systemName: "figure.surfing")
+                Image(systemName: "bolt.fill")
                     .foregroundColor(.white)
             }
             
@@ -72,22 +72,22 @@ struct GaugeView: View {
     func getTitle(from value: Int) -> String {
         switch value {
         case 1:
-            return "Beginner"
+            return "Weak"
         case 2:
-            return "Intermediate"
+            return "Medium"
         case 3:
-            return "Advanced"
+            return "Strong"
         case 4:
-           return "Professional"
+           return "Barrels"
         default:
            return "Not disclosed"
         }
     }
 }
 
-struct GaugeView_Previews: PreviewProvider {
+struct PowerGaugeView_Previews: PreviewProvider {
     static var previews: some View {
-        GaugeView(value: [1, 4])
+        PowerGaugeView(value: [1, 4])
             .preferredColorScheme(.dark)
     }
 }
