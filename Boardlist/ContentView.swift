@@ -12,7 +12,11 @@ struct ContentView: View {
     let boards: [Boards] = Bundle.main.decode("boards.json")
     let columns = [GridItem(.adaptive(minimum: 300))]
     
+    @StateObject var favourites = Favourites()
     @State private var searchText = ""
+    
+    // property for the segmented control
+    @State private var isFavourited = false
     
     var searchResults: [Boards] {
         if searchText.isEmpty {
@@ -30,6 +34,15 @@ struct ContentView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns) {
+                        VStack {
+                            Picker("Placeholder", selection: $isFavourited) {
+                                Text("All boards").tag(false)
+                                Text("Favourites").tag(true)
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                        .padding(.vertical, 8)
+                        
                         ForEach(searchResults) { board in
                             NavigationLink {
                                 
@@ -48,6 +61,11 @@ struct ContentView: View {
                                             Spacer()
                                             HStack {
                                                 Spacer()
+                                                if favourites.contains(board) {
+                                                    Image(systemName: "heart.fill")
+                                                        .accessibilityLabel("This is a favourite surfboard")
+                                                        .foregroundColor(.red)
+                                                }
                                                 Text(board.boardType)
                                                     .font(.footnote)
                                                     .foregroundColor(.white)
@@ -72,7 +90,19 @@ struct ContentView: View {
                                             .font(.title)
                                             .fontWeight(.bold)
                                                .foregroundColor(.white)
-                                        RatingView(rating: board.ratingTotal)
+                                        HStack(alignment: .bottom) {
+                                            RatingView(rating: board.ratingTotal)
+                                            Text("(+50 reviews)")
+                                                .foregroundColor(.white.opacity(0.3))
+                                        }
+                                        
+                                        Button(favourites.contains(board) ? "Remove from Favourites" : "Add to Favourites") {
+                                            if favourites.contains(board) {
+                                                favourites.remove(board)
+                                            } else {
+                                                favourites.add(board)
+                                            }
+                                        }
                                             
                                         Divider()
                                             .frame(height: 1.4)
@@ -89,6 +119,7 @@ struct ContentView: View {
                                     .frame(maxWidth: .infinity)
                                     .padding([.horizontal, .bottom])
                                 }
+                                .background(.thinMaterial.opacity(0.6))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
                                 .padding(.bottom, 8)
@@ -109,6 +140,7 @@ struct ContentView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
+        .environmentObject(favourites)
         .searchable(text: $searchText.animation(), prompt: "Find your board here")
     }
 }
