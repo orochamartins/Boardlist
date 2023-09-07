@@ -19,10 +19,11 @@ struct ContentView: View {
     @State private var isFavourited = false
     
     var searchResults: [Boards] {
+        var segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
         if searchText.isEmpty {
-            return boards
+            return segmentedBoards
         } else {
-            return boards.filter { $0.brand.localizedCaseInsensitiveContains(searchText) || $0.model.localizedCaseInsensitiveContains(searchText) || $0.material.localizedCaseInsensitiveContains(searchText) || $0.finType.localizedCaseInsensitiveContains(searchText) || $0.boardType.localizedCaseInsensitiveContains(searchText) || $0.tailType.localizedCaseInsensitiveContains(searchText)
+            return segmentedBoards.filter { $0.brand.localizedCaseInsensitiveContains(searchText) || $0.model.localizedCaseInsensitiveContains(searchText) || $0.material.localizedCaseInsensitiveContains(searchText) || $0.finType.localizedCaseInsensitiveContains(searchText) || $0.boardType.localizedCaseInsensitiveContains(searchText) || $0.tailType.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
@@ -35,7 +36,7 @@ struct ContentView: View {
                 ScrollView {
                     LazyVGrid(columns: columns) {
                         VStack {
-                            Picker("Placeholder", selection: $isFavourited) {
+                            Picker("Placeholder", selection: $isFavourited.animation()) {
                                 Text("All boards").tag(false)
                                 Text("Favourites").tag(true)
                             }
@@ -61,11 +62,6 @@ struct ContentView: View {
                                             Spacer()
                                             HStack {
                                                 Spacer()
-                                                if favourites.contains(board) {
-                                                    Image(systemName: "heart.fill")
-                                                        .accessibilityLabel("This is a favourite surfboard")
-                                                        .foregroundColor(.red)
-                                                }
                                                 Text(board.boardType)
                                                     .font(.footnote)
                                                     .foregroundColor(.white)
@@ -81,28 +77,41 @@ struct ContentView: View {
                                     
                                     //Board brand, model and rating
                                     
-                                    VStack(alignment: .leading, spacing: 6) {
-                                        Text(board.brand)
-                                            .font(.headline)
-                                            .fontWeight(.regular)
-                                            .foregroundColor(.primary.opacity(0.5))
-                                        Text(board.model)
-                                            .font(.title)
-                                            .fontWeight(.bold)
-                                               .foregroundColor(.white)
-                                        HStack(alignment: .bottom) {
-                                            RatingView(rating: board.ratingTotal)
-                                            Text("(+50 reviews)")
-                                                .foregroundColor(.white.opacity(0.3))
-                                        }
-                                        
-                                        Button(favourites.contains(board) ? "Remove from Favourites" : "Add to Favourites") {
-                                            if favourites.contains(board) {
-                                                favourites.remove(board)
-                                            } else {
-                                                favourites.add(board)
+                                    VStack(alignment: .leading) {
+                                        HStack(alignment: .top) {
+                                            VStack(alignment: .leading, spacing: 6) {
+                                                Text(board.brand)
+                                                    .font(.headline)
+                                                    .fontWeight(.regular)
+                                                    .foregroundColor(.primary.opacity(0.5))
+                                                Text(board.model)
+                                                    .font(.title)
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(.white)
+                                                HStack(alignment: .bottom) {
+                                                    RatingView(rating: board.ratingTotal)
+                                                    Text("(+50 reviews)")
+                                                        .foregroundColor(.white.opacity(0.3))
+                                                }
                                             }
+                                            
+                                            Spacer()
+                                            
+                                            Button {
+                                                withAnimation {
+                                                    if favourites.contains(board) {
+                                                        favourites.remove(board)
+                                                    } else {
+                                                        favourites.add(board)
+                                                    }
+                                                }
+                                            } label: {
+                                                Image(systemName: favourites.contains(board) ? "heart.fill" : "heart")
+                                                    .foregroundColor(favourites.contains(board) ? .red : .blue)
+                                            }
+                                            .font(.title2)
                                         }
+                        
                                             
                                         Divider()
                                             .frame(height: 1.4)
@@ -138,6 +147,8 @@ struct ContentView: View {
                 }
                 .preferredColorScheme(.dark)
                 .navigationBarTitleDisplayMode(.inline)
+                
+                LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .bottom, endPoint: UnitPoint(x: 0, y: 0.1)).ignoresSafeArea()
             }
         }
         .environmentObject(favourites)
