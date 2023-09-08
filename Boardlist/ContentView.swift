@@ -18,8 +18,9 @@ struct ContentView: View {
     // property for the segmented control
     @State private var isFavourited = false
     
+    
     var searchResults: [Boards] {
-        var segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
+        let segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
         if searchText.isEmpty {
             return segmentedBoards
         } else {
@@ -35,14 +36,6 @@ struct ContentView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: columns) {
-                        VStack {
-                            Picker("Placeholder", selection: $isFavourited.animation()) {
-                                Text("All boards").tag(false)
-                                Text("Favourites").tag(true)
-                            }
-                            .pickerStyle(.segmented)
-                        }
-                        .padding(.vertical, 8)
                         
                         ForEach(searchResults) { board in
                             NavigationLink {
@@ -90,7 +83,7 @@ struct ContentView: View {
                                                     .foregroundColor(.white)
                                                 HStack(alignment: .bottom) {
                                                     RatingView(rating: board.ratingTotal)
-                                                    Text("(+50 reviews)")
+                                                    Text("(+50)")
                                                         .foregroundColor(.white.opacity(0.3))
                                                 }
                                             }
@@ -148,7 +141,51 @@ struct ContentView: View {
                 .preferredColorScheme(.dark)
                 .navigationBarTitleDisplayMode(.inline)
                 
-                LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .bottom, endPoint: UnitPoint(x: 0, y: 0.1)).ignoresSafeArea()
+                
+                // Small bottom gradient behind toolbar
+                VStack {
+                    Spacer()
+                    VStack {
+                        LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .bottom, endPoint: .top).ignoresSafeArea()
+                    }
+                    .frame(height: 70)
+                }
+                .allowsHitTesting(false)
+                
+                // Favourites and Filter toolbar
+                
+                VStack {
+                    Spacer()
+                    HStack(spacing: 24) {
+                        VStack {
+                            Button {
+                                withAnimation {
+                                    isFavourited.toggle()
+                                }
+                            } label: {
+                                Image(systemName: isFavourited ? "heart.fill" : "heart")
+                                    .foregroundColor(.white)
+                            }
+                            .font(.largeTitle)
+                        }
+                        
+                        VStack {
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "slider.horizontal.3")
+                                    .foregroundColor(.white)
+                            }
+                            .font(.largeTitle)
+                        }
+                    }
+                    .frame(height: 56)
+                    .padding(.horizontal)
+                    .background(.ultraThinMaterial)
+                    .clipShape(Capsule())
+                    .overlay(Capsule().stroke(.ultraThinMaterial))
+                }
+                .padding(.bottom, 8)
             }
         }
         .environmentObject(favourites)
