@@ -34,113 +34,138 @@ struct ContentView: View {
             ZStack {
                 LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1))], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 
-                ScrollView {
-                    LazyVGrid(columns: columns) {
-                        
-                        ForEach(searchResults) { board in
-                            NavigationLink {
+                    ScrollView {
+                        LazyVGrid(columns: columns) {
+                            
+                            ZStack {
                                 
-                            } label: {
-                                VStack(alignment: .leading, spacing: 14) {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                        .foregroundColor(.gray)
+                                    TextField("Find your board here", text: $searchText)
                                     
-                                    //Board image with content
-                                    
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(.blue)
-                                            .frame(height: 100)
-                                            .padding([.horizontal, .top])
-                                        
-                                        VStack(alignment: .trailing) {
-                                            Spacer()
-                                            HStack {
-                                                Spacer()
-                                                Text(board.boardType)
-                                                    .font(.footnote)
-                                                    .foregroundColor(.white)
-                                                    .padding(.vertical, 6)
-                                                    .padding(.horizontal, 10)
-                                                    .background(.ultraThinMaterial)
-                                                    .cornerRadius(16)
-                                            }
-                                            .padding(6)
+                                    if searchText != "" {
+                                        Spacer()
+                                        Button {
+                                            searchText = ""
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .foregroundColor(.gray)
                                         }
-                                        .padding([.horizontal, .top])
                                     }
-                                    
-                                    //Board brand, model and rating
-                                    
-                                    VStack(alignment: .leading) {
-                                        HStack(alignment: .top) {
-                                            VStack(alignment: .leading, spacing: 6) {
-                                                Text(board.brand)
-                                                    .font(.headline)
-                                                    .fontWeight(.regular)
-                                                    .foregroundColor(.primary.opacity(0.5))
-                                                Text(board.model)
-                                                    .font(.title)
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(.white)
-                                                HStack(alignment: .bottom) {
-                                                    RatingView(rating: board.ratingTotal)
-                                                    Text("(+50)")
-                                                        .foregroundColor(.white.opacity(0.3))
-                                                }
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                            Button {
-                                                withAnimation {
-                                                    if favourites.contains(board) {
-                                                        favourites.remove(board)
-                                                    } else {
-                                                        favourites.add(board)
-                                                    }
-                                                }
-                                            } label: {
-                                                Image(systemName: favourites.contains(board) ? "heart.fill" : "heart")
-                                                    .foregroundColor(favourites.contains(board) ? .red : .blue)
-                                            }
-                                            .font(.title2)
-                                        }
-                        
-                                            
-                                        Divider()
-                                            .frame(height: 1.4)
-                                            .overlay(.ultraThinMaterial)
-                                            .padding(.vertical)
-                                            
-                                        HStack(alignment: .center) {
-                                            GaugeView(value: board.difficulty)
-                                            WaveGaugeView(value: board.waveRange)
-                                            PowerGaugeView(value: board.powerRange)
-                                        }
-                                        .frame(maxWidth: .infinity)
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding([.horizontal, .bottom])
                                 }
+                                .padding(8)
                                 .background(.thinMaterial.opacity(0.6))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
-                                .padding(.bottom, 8)
+                                
+                                RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
+                                    .allowsHitTesting(false)
+                            }
+                            .padding(.bottom, 6)
+                            
+                            ForEach(searchResults) { board in
+                                NavigationLink {
+                                    
+                                } label: {
+                                    VStack(alignment: .leading, spacing: 14) {
+                                        
+                                        //Board image with content
+                                        
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.blue)
+                                                .frame(height: 100)
+                                                .padding([.horizontal, .top])
+                                            
+                                            VStack(alignment: .trailing) {
+                                                Spacer()
+                                                HStack {
+                                                    Spacer()
+                                                    Text(board.boardType)
+                                                        .font(.footnote)
+                                                        .foregroundColor(.white)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 10)
+                                                        .background(.ultraThinMaterial)
+                                                        .cornerRadius(16)
+                                                }
+                                                .padding(6)
+                                            }
+                                            .padding([.horizontal, .top])
+                                        }
+                                        
+                                        //Board brand, model and rating
+                                        
+                                        VStack(alignment: .leading) {
+                                            HStack(alignment: .top) {
+                                                VStack(alignment: .leading, spacing: 6) {
+                                                    Text(board.brand)
+                                                        .font(.headline)
+                                                        .fontWeight(.regular)
+                                                        .foregroundColor(.primary.opacity(0.5))
+                                                    Text(board.model)
+                                                        .font(.title)
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(.white)
+                                                    HStack(alignment: .bottom) {
+                                                        RatingView(rating: board.ratingTotal)
+                                                        Text("(+50)")
+                                                            .foregroundColor(.white.opacity(0.3))
+                                                    }
+                                                }
+                                                
+                                                Spacer()
+                                                
+                                                Button {
+                                                    withAnimation {
+                                                        if favourites.contains(board) {
+                                                            favourites.remove(board)
+                                                        } else {
+                                                            favourites.add(board)
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Image(systemName: favourites.contains(board) ? "heart.fill" : "heart")
+                                                        .foregroundColor(favourites.contains(board) ? .red : .blue)
+                                                }
+                                                .font(.title2)
+                                            }
+                                            
+                                            
+                                            Divider()
+                                                .frame(height: 1.4)
+                                                .overlay(.ultraThinMaterial)
+                                                .padding(.vertical)
+                                            
+                                            HStack(alignment: .center) {
+                                                GaugeView(value: board.difficulty)
+                                                WaveGaugeView(value: board.waveRange)
+                                                PowerGaugeView(value: board.powerRange)
+                                            }
+                                            .frame(maxWidth: .infinity)
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .padding([.horizontal, .bottom])
+                                    }
+                                    .background(.thinMaterial.opacity(0.6))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
+                                    .padding(.bottom, 8)
+                                }
+                            }
+                        }
+                        .padding([.horizontal, .bottom])
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            HStack {
+                                Image(systemName: "triangle")
+                                Text("Boardlist")
                             }
                         }
                     }
-                    .padding([.horizontal, .bottom])
-                }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        HStack {
-                            Image(systemName: "triangle")
-                            Text("Boardlist")
-                        }
-                    }
-                }
-                .preferredColorScheme(.dark)
-                .navigationBarTitleDisplayMode(.inline)
-                
+                    .preferredColorScheme(.dark)
+                    .navigationBarTitleDisplayMode(.inline)
                 
                 // Small bottom gradient behind toolbar
                 VStack {
@@ -189,7 +214,7 @@ struct ContentView: View {
             }
         }
         .environmentObject(favourites)
-        .searchable(text: $searchText.animation(), prompt: "Find your board here")
+        //.searchable(text: $searchText.animation(), prompt: "Find your board here")
     }
 }
 
