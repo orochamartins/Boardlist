@@ -18,6 +18,9 @@ struct ContentView: View {
     // property for the segmented control
     @State private var isFavourited = false
     
+    // focus state to control search text field
+    @FocusState private var searchFieldIsFocused: Bool
+    
     
     var searchResults: [Boards] {
         let segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
@@ -37,31 +40,42 @@ struct ContentView: View {
                     ScrollView {
                         LazyVGrid(columns: columns) {
                             
-                            ZStack {
-                                
-                                HStack {
-                                    Image(systemName: "magnifyingglass")
-                                        .foregroundColor(.gray)
-                                    TextField("Find your board here", text: $searchText)
-                                    
-                                    if searchText != "" {
-                                        Spacer()
-                                        Button {
-                                            searchText = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .foregroundColor(.gray)
+                            HStack{
+                                ZStack {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(.gray)
+                                        TextField("Find your board here", text: $searchText)
+                                            .focused($searchFieldIsFocused)
+                                        
+                                        if searchText != "" {
+                                            Spacer()
+                                            Button {
+                                                searchText = ""
+                                            } label: {
+                                                Image(systemName: "xmark.circle.fill")
+                                                    .foregroundColor(.gray)
+                                            }
                                         }
                                     }
+                                    .padding(8)
+                                    .background(.thinMaterial.opacity(0.6))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                                    RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
+                                        .allowsHitTesting(false)
                                 }
-                                .padding(8)
-                                .background(.thinMaterial.opacity(0.6))
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .padding(.bottom, 6)
                                 
-                                RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
-                                    .allowsHitTesting(false)
+                                if searchFieldIsFocused {
+                                    Button("Cancel") {
+                                        searchFieldIsFocused = false
+                                        searchText = ""
+                                    }
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                }
                             }
-                            .padding(.bottom, 6)
                             
                             ForEach(searchResults) { board in
                                 NavigationLink {
@@ -98,19 +112,21 @@ struct ContentView: View {
                                         
                                         VStack(alignment: .leading) {
                                             HStack(alignment: .top) {
-                                                VStack(alignment: .leading, spacing: 6) {
-                                                    Text(board.brand)
-                                                        .font(.headline)
-                                                        .fontWeight(.regular)
-                                                        .foregroundColor(.primary.opacity(0.5))
-                                                    Text(board.model)
-                                                        .font(.title)
-                                                        .fontWeight(.bold)
-                                                        .foregroundColor(.white)
-                                                    HStack(alignment: .bottom) {
-                                                        RatingView(rating: board.ratingTotal)
-                                                        Text("(+50)")
-                                                            .foregroundColor(.white.opacity(0.3))
+                                                HStack{
+                                                    VStack(alignment: .leading, spacing: 6) {
+                                                        Text(board.brand)
+                                                            .font(.headline)
+                                                            .fontWeight(.regular)
+                                                            .foregroundColor(.primary.opacity(0.5))
+                                                        Text(board.model)
+                                                            .font(.title)
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                        HStack(alignment: .bottom) {
+                                                            RatingView(rating: board.ratingTotal)
+                                                            Text("(+50)")
+                                                                .foregroundColor(.white.opacity(0.3))
+                                                        }
                                                     }
                                                 }
                                                 
