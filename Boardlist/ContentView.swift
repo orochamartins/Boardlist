@@ -65,7 +65,7 @@ struct ContentView: View {
                                     RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
                                         .allowsHitTesting(false)
                                 }
-                                .padding(.bottom, 6)
+                                .padding(.bottom, 8)
                                 
                                 if searchFieldIsFocused {
                                     Button("Cancel") {
@@ -81,38 +81,39 @@ struct ContentView: View {
                                 NavigationLink {
                                     
                                 } label: {
+                                    
                                     VStack(alignment: .leading, spacing: 14) {
                                         
-                                        //Board image with content
-                                        
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(.blue)
-                                                .frame(height: 100)
-                                                .padding([.horizontal, .top])
-                                            
-                                            VStack(alignment: .trailing) {
-                                                Spacer()
-                                                HStack {
-                                                    Spacer()
-                                                    Text(board.boardType)
-                                                        .font(.footnote)
-                                                        .foregroundColor(.white)
-                                                        .padding(.vertical, 6)
-                                                        .padding(.horizontal, 10)
-                                                        .background(.ultraThinMaterial)
-                                                        .cornerRadius(16)
-                                                }
-                                                .padding(6)
-                                            }
-                                            .padding([.horizontal, .top])
-                                        }
-                                        
-                                        //Board brand, model and rating
+                                         //Board brand, model and rating
                                         
                                         VStack(alignment: .leading) {
                                             HStack(alignment: .top) {
                                                 HStack{
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 8)
+                                                            .fill(.blue)
+                                                            .frame(width: 100, height: 100)
+                                                            .padding(.top)
+                                                            .padding(.trailing, 8)
+                                                        
+                                                        VStack(alignment: .trailing) {
+                                                            Spacer()
+                                                            HStack {
+                                                                Text(board.boardType)
+                                                                    .font(.footnote)
+                                                                    .foregroundColor(.white)
+                                                                    .padding(.vertical, 6)
+                                                                    .padding(.horizontal, 10)
+                                                                    .background(.ultraThinMaterial)
+                                                                    .cornerRadius(16)
+                                                                
+                                                                Spacer()
+                                                            }
+                                                            .padding(4)
+                                                        }
+                                                        .frame(width: 106, height: 116)
+                                                    }
+                                                    
                                                     VStack(alignment: .leading, spacing: 6) {
                                                         Text(board.brand)
                                                             .font(.headline)
@@ -128,6 +129,7 @@ struct ContentView: View {
                                                                 .foregroundColor(.white.opacity(0.3))
                                                         }
                                                     }
+                                                    .padding(.top, 12)
                                                 }
                                                 
                                                 Spacer()
@@ -142,16 +144,18 @@ struct ContentView: View {
                                                     }
                                                 } label: {
                                                     Image(systemName: favourites.contains(board) ? "heart.fill" : "heart")
-                                                        .foregroundColor(favourites.contains(board) ? .red : .blue)
+                                                        .foregroundColor(.blue)
                                                 }
                                                 .font(.title2)
+                                                .padding(.top, 20)
                                             }
                                             
                                             
                                             Divider()
                                                 .frame(height: 1.4)
                                                 .overlay(.ultraThinMaterial)
-                                                .padding(.vertical)
+                                                .padding(.top, 4)
+                                                .padding(.bottom)
                                             
                                             HStack(alignment: .center) {
                                                 GaugeView(value: board.difficulty)
