@@ -12,6 +12,7 @@
 		7F68DF002A9E9FB300C1EABD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68DEFF2A9E9FB300C1EABD /* Assets.xcassets */; };
 		7F68DF032A9E9FB300C1EABD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68DF022A9E9FB300C1EABD /* Preview Assets.xcassets */; };
 		7F68DF0A2A9EA3A500C1EABD /* boards.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F68DF092A9EA3A500C1EABD /* boards.json */; };
+		7F72292C2AB3C2B000454881 /* FilterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F72292B2AB3C2B000454881 /* FilterSheetView.swift */; };
 		7F74510E2AA50A6300403FBC /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F74510D2AA50A6300403FBC /* RatingView.swift */; };
 		7F753C932AB27AA90046906E /* EmptyFavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F753C922AB27AA90046906E /* EmptyFavouritesView.swift */; };
 		7F773E8F2AA68CCA003B2E3E /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F773E8E2AA68CCA003B2E3E /* GaugeView.swift */; };
@@ -29,6 +30,7 @@
 		7F68DEFF2A9E9FB300C1EABD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68DF022A9E9FB300C1EABD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7F68DF092A9EA3A500C1EABD /* boards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = boards.json; sourceTree = "<group>"; };
+		7F72292B2AB3C2B000454881 /* FilterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheetView.swift; sourceTree = "<group>"; };
 		7F74510D2AA50A6300403FBC /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		7F753C922AB27AA90046906E /* EmptyFavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavouritesView.swift; sourceTree = "<group>"; };
 		7F773E8E2AA68CCA003B2E3E /* GaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				7F68DEFB2A9E9FB100C1EABD /* BoardlistApp.swift */,
 				7F68DEFD2A9E9FB100C1EABD /* ContentView.swift */,
+				7F72292B2AB3C2B000454881 /* FilterSheetView.swift */,
 				7F7A53F62AA9305C009FAA90 /* Favourites.swift */,
 				7F7B55812AA7E7CD00AE3299 /* PowerGaugeView.swift */,
 				7F74510D2AA50A6300403FBC /* RatingView.swift */,
@@ -198,6 +201,7 @@
 				7F753C932AB27AA90046906E /* EmptyFavouritesView.swift in Sources */,
 				7F7AD6BE2A9FECE900D424A1 /* Bundle-Decodable.swift in Sources */,
 				7F7A53F72AA9305C009FAA90 /* Favourites.swift in Sources */,
+				7F72292C2AB3C2B000454881 /* FilterSheetView.swift in Sources */,
 				7F7B55802AA7DD6B00AE3299 /* WaveGaugeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

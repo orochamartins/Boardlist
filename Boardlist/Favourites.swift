@@ -34,6 +34,15 @@ class Favourites: ObservableObject {
         favouriteBoards.contains(board.id)
     }
     
+    // returns true if our Set contains boards and false otherwise
+    func isEmpty() -> Bool {
+        if favouriteBoards.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     // adds the board to our set, updates all views, and saves the changes
     func add(_ board: Boards) {
         objectWillChange.send()

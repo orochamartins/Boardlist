@@ -21,7 +21,6 @@ struct ContentView: View {
     // focus state to control search text field
     @FocusState private var searchFieldIsFocused: Bool
     
-    
     var searchResults: [Boards] {
         let segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
         if searchText.isEmpty {
@@ -36,6 +35,10 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1))], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                
+                if isFavourited && favourites.isEmpty() {
+                    EmptyFavouritesView()
+                }
                 
                     ScrollView {
                         LazyVGrid(columns: columns) {
@@ -234,7 +237,6 @@ struct ContentView: View {
             }
         }
         .environmentObject(favourites)
-        //.searchable(text: $searchText.animation(), prompt: "Find your board here")
     }
 }
 
