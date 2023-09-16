@@ -18,6 +18,10 @@ struct ContentView: View {
     // property for the segmented control
     @State private var isFavourited = false
     
+    // filter sheet controller
+    @State private var isFiltersActive = false
+    @State private var filterSheetHeight: CGFloat = .zero
+    
     // focus state to control search text field
     @FocusState private var searchFieldIsFocused: Bool
     
@@ -219,7 +223,7 @@ struct ContentView: View {
                         
                         VStack {
                             Button {
-                                
+                                isFiltersActive = true
                             } label: {
                                 Image(systemName: "slider.horizontal.3")
                                     .foregroundColor(.white)
@@ -237,6 +241,26 @@ struct ContentView: View {
             }
         }
         .environmentObject(favourites)
+        .sheet(isPresented: $isFiltersActive) {
+            FilterSheetView()
+                .overlay {
+                    GeometryReader { geometry in
+                        Color.clear.preference(key: InnerHeightPreferenceKey.self, value: geometry.size.height)
+                    }
+                }
+                .onPreferenceChange(InnerHeightPreferenceKey.self) { newHeight in
+                    filterSheetHeight = newHeight
+                }
+                .presentationDetents([.height(filterSheetHeight)])
+                .presentationDragIndicator(.visible)
+        }
+    }
+}
+
+struct InnerHeightPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = .zero
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 

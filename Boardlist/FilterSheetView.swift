@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FilterSheetView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     // Brand filter settings
     let brandList = ["All", "Chris Christenson", "Album", "Channel Islands", "Sharpeye"]
     @State private var selectedBrand = "All"
@@ -25,35 +27,37 @@ struct FilterSheetView: View {
     let finSystemList = ["All", "FCS I", "FCS II", "Futures", "Glassed on"]
     @State private var selectedFinSystem = "All"
     
+    // Tail type filter settings
+    let tailTypeList = ["All", "Squashed", "Swallow", "Fish", "Diamond"]
+    @State private var selectedTailType = "All"
+    
+    // Difficulty filter settings
+    let difficultyList = ["All", "Beginner", "Intermediate", "Advanced", "Professional"]
+    @State private var diffilcutyType = "All"
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 14) {
+            FilterFieldView(pickerName: "Brand", selectedValue: selectedBrand, valuesArray: brandList)
             
-            Form {
-                Picker("Brand", selection: $selectedBrand) {
-                    ForEach(brandList, id: \.self) {
-                        Text($0)
-                    }
-                }
-                
-                Picker("Material", selection: $selectedMaterial) {
-                    ForEach(materialList, id: \.self) {
-                        Text($0)
-                    }
-                }
-                
-                Picker("Fin type", selection: $selectedFinType) {
-                    ForEach(finTypeList, id: \.self) {
-                        Text($0)
-                    }
-                }
-                
-                Picker("Fin system", selection: $selectedFinSystem) {
-                    ForEach(finSystemList, id: \.self) {
-                        Text($0)
-                    }
-                }
+            FilterFieldView(pickerName: "Material", selectedValue: selectedMaterial, valuesArray: materialList)
+            
+            FilterFieldView(pickerName: "Fin type", selectedValue: selectedFinType, valuesArray: finTypeList)
+            
+            FilterFieldView(pickerName: "Fin system", selectedValue: selectedFinSystem, valuesArray: finSystemList)
+            
+            FilterFieldView(pickerName: "Tail type", selectedValue: selectedTailType, valuesArray: tailTypeList)
+            
+            FilterFieldView(pickerName: "Difficulty", selectedValue: diffilcutyType, valuesArray: difficultyList)
+            
+                    
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "triangle")
+                Text("Apply filters")
             }
         }
+        .padding(.horizontal)
     }
 }
 

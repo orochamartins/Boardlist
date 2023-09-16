@@ -10,7 +10,7 @@ import SwiftUI
 struct EmptyFavouritesView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            Image(systemName: "star.slash")
+            Image(systemName: "heart.slash")
                 .font(.system(size: 48))
                 .foregroundColor(.blue)
                 .padding(.bottom, 6)
