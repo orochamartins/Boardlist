@@ -23,41 +23,90 @@ struct FilterSheetView: View {
     let finTypeList = ["All", "Thruster", "Quad", "Twin", "Bonzer", "Single", "2+1", "1+2"]
     @State private var selectedFinType = "All"
     
-    // Fin system filter settings
-    let finSystemList = ["All", "FCS I", "FCS II", "Futures", "Glassed on"]
-    @State private var selectedFinSystem = "All"
-    
-    // Tail type filter settings
-    let tailTypeList = ["All", "Squashed", "Swallow", "Fish", "Diamond"]
-    @State private var selectedTailType = "All"
-    
     // Difficulty filter settings
     let difficultyList = ["All", "Beginner", "Intermediate", "Advanced", "Professional"]
     @State private var diffilcutyType = "All"
     
+    // Wave size filter settings
+    let waveSizeList = ["All", "Knee", "Head", "Overhead", "Double+"]
+    @State private var waveSizeType = "All"
+    
+    // Wave power filter settings
+    let wavePowerList = ["All", "Weak", "Medium", "Strong", "Barrels"]
+    @State private var wavePowerType = "All"
+    
+    // Board type filter settings
+    let boardTypeList = ["All", "Funboard", "Fish", "Shortboard", "Midlength", "Longboard", "Gun"]
+    @State private var boardType = "All"
+    
     var body: some View {
-        VStack(spacing: 14) {
-            FilterFieldView(pickerName: "Brand", selectedValue: selectedBrand, valuesArray: brandList)
+        VStack(spacing: 24) {
             
-            FilterFieldView(pickerName: "Material", selectedValue: selectedMaterial, valuesArray: materialList)
+            ZStack {
+                Text("Filters")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                
+                Button("Clear") {
+                    selectedBrand = "All"
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .padding(.top)
             
-            FilterFieldView(pickerName: "Fin type", selectedValue: selectedFinType, valuesArray: finTypeList)
+            VStack {
+                Text("General")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                FilterFieldView(pickerName: "Brand", selectedValue: selectedBrand, valuesArray: brandList)
+                
+                FilterFieldView(pickerName: "Type", selectedValue: boardType, valuesArray: boardTypeList)
+            }
+                
+            VStack {
+                Text("Technical")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                FilterFieldView(pickerName: "Material", selectedValue: selectedMaterial, valuesArray: materialList)
+                
+                FilterFieldView(pickerName: "Fins", selectedValue: selectedFinType, valuesArray: finTypeList)
+                
+            }
             
-            FilterFieldView(pickerName: "Fin system", selectedValue: selectedFinSystem, valuesArray: finSystemList)
-            
-            FilterFieldView(pickerName: "Tail type", selectedValue: selectedTailType, valuesArray: tailTypeList)
-            
-            FilterFieldView(pickerName: "Difficulty", selectedValue: diffilcutyType, valuesArray: difficultyList)
+            VStack {
+                
+                Text("Criteria")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                FilterFieldView(pickerName: "Difficulty", selectedValue: diffilcutyType, valuesArray: difficultyList)
+                
+                FilterFieldView(pickerName: "Wave size", selectedValue: waveSizeType, valuesArray: waveSizeList)
+                
+                FilterFieldView(pickerName: "Wave power", selectedValue: wavePowerType, valuesArray: wavePowerList)
+            }
             
                     
             Button {
                 dismiss()
             } label: {
-                Image(systemName: "triangle")
+                Image(systemName: "checkmark.circle")
                 Text("Apply filters")
             }
+            .frame(maxWidth: .infinity)
+            .font(.headline)
+            .foregroundColor(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .padding(.top, 8)
         }
-        .padding(.horizontal)
+        .padding()
     }
 }
 
