@@ -14,6 +14,7 @@ struct ContentView: View {
     
     @StateObject var favourites = Favourites()
     @State private var searchText = ""
+    @Binding var filteredOptions: [String]
     
     // property for the segmented control
     @State private var isFavourited = false
@@ -27,10 +28,23 @@ struct ContentView: View {
     
     var searchResults: [Boards] {
         let segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
-        if searchText.isEmpty {
+        
+        if searchText.isEmpty && filteredOptions.allSatisfy({$0 == "All"}) {
             return segmentedBoards
+            
+        } else if searchText.isEmpty && !filteredOptions.allSatisfy({$0 == "All"}) {
+            return segmentedBoards.filter { item in
+                filteredOptions.contains { option in
+                    item.brand.localizedCaseInsensitiveContains(option)
+                    || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
+                }
+            }
+                
         } else {
-            return segmentedBoards.filter { $0.brand.localizedCaseInsensitiveContains(searchText) || $0.model.localizedCaseInsensitiveContains(searchText) || $0.material.localizedCaseInsensitiveContains(searchText) || $0.finType.localizedCaseInsensitiveContains(searchText) || $0.boardType.localizedCaseInsensitiveContains(searchText) || $0.tailType.localizedCaseInsensitiveContains(searchText)
+            return segmentedBoards.filter { item in
+                filteredOptions.contains { option in
+                    item.brand.localizedCaseInsensitiveContains(searchText) || item.model.localizedCaseInsensitiveContains(searchText) || item.material.localizedCaseInsensitiveContains(searchText) || item.finType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.tailType.localizedCaseInsensitiveContains(searchText) || item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
+                }
             }
         }
     }
@@ -266,6 +280,7 @@ struct InnerHeightPreferenceKey: PreferenceKey {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let filteredOptions = ["Lane", "All", "Epoxy", "All", "All", "All", "All"]
+        ContentView(filteredOptions: .constant(filteredOptions))
     }
 }

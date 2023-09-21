@@ -10,6 +10,7 @@ import SwiftUI
 struct FilterSheetView: View {
     
     @Environment(\.dismiss) var dismiss
+    @State private var filteredOptions = ["All", "All", "All", "All", "All", "All", "All"]
     
     // Brand filter settings
     let brandList = ["All", "Chris Christenson", "Album", "Channel Islands", "Sharpeye"]

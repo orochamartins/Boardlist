@@ -10,8 +10,9 @@ import SwiftUI
 @main
 struct BoardlistApp: App {
     var body: some Scene {
+        let filteredOptions = [String]()
         WindowGroup {
-            ContentView()
+            ContentView(filteredOptions: .constant(filteredOptions))
         }
     }
 }
