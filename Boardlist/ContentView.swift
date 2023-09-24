@@ -100,7 +100,7 @@ struct ContentView: View {
                             
                             ForEach(searchResults) { board in
                                 NavigationLink {
-                                    
+                                    BoardDetailView(board: board, favourites: favourites)
                                 } label: {
                                     
                                     VStack(alignment: .leading, spacing: 14) {

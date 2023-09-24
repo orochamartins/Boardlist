@@ -22,6 +22,8 @@
 		7F7AD6BE2A9FECE900D424A1 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AD6BD2A9FECE800D424A1 /* Bundle-Decodable.swift */; };
 		7F7B55802AA7DD6B00AE3299 /* WaveGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7B557F2AA7DD6B00AE3299 /* WaveGaugeView.swift */; };
 		7F7B55822AA7E7CD00AE3299 /* PowerGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7B55812AA7E7CD00AE3299 /* PowerGaugeView.swift */; };
+		7F7D69CD2AC0EF690041090E /* BoardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D69CC2AC0EF690041090E /* BoardDetailView.swift */; };
+		7F7D69CF2AC0FD5E0041090E /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D69CE2AC0FD5E0041090E /* ImageScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		7F7AD6BD2A9FECE800D424A1 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		7F7B557F2AA7DD6B00AE3299 /* WaveGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveGaugeView.swift; sourceTree = "<group>"; };
 		7F7B55812AA7E7CD00AE3299 /* PowerGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerGaugeView.swift; sourceTree = "<group>"; };
+		7F7D69CC2AC0EF690041090E /* BoardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDetailView.swift; sourceTree = "<group>"; };
+		7F7D69CE2AC0FD5E0041090E /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				7F753C922AB27AA90046906E /* EmptyFavouritesView.swift */,
 				7F68DEFB2A9E9FB100C1EABD /* BoardlistApp.swift */,
 				7F68DEFD2A9E9FB100C1EABD /* ContentView.swift */,
+				7F7D69CC2AC0EF690041090E /* BoardDetailView.swift */,
+				7F7D69CE2AC0FD5E0041090E /* ImageScrollView.swift */,
 				7F72292B2AB3C2B000454881 /* FilterSheetView.swift */,
 				7F7439112AB66660000AAD52 /* FilterFieldView.swift */,
 				7F7A53F62AA9305C009FAA90 /* Favourites.swift */,
@@ -196,10 +202,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F7B55822AA7E7CD00AE3299 /* PowerGaugeView.swift in Sources */,
+				7F7D69CF2AC0FD5E0041090E /* ImageScrollView.swift in Sources */,
 				7F68DEFE2A9E9FB100C1EABD /* ContentView.swift in Sources */,
 				7F68DEFC2A9E9FB100C1EABD /* BoardlistApp.swift in Sources */,
 				7F7AD6BC2A9FE99000D424A1 /* Boards.swift in Sources */,
 				7F74510E2AA50A6300403FBC /* RatingView.swift in Sources */,
+				7F7D69CD2AC0EF690041090E /* BoardDetailView.swift in Sources */,
 				7F773E8F2AA68CCA003B2E3E /* GaugeView.swift in Sources */,
 				7F753C932AB27AA90046906E /* EmptyFavouritesView.swift in Sources */,
 				7F7AD6BE2A9FECE900D424A1 /* Bundle-Decodable.swift in Sources */,

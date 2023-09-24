@@ -26,7 +26,7 @@ struct FilterSheetView: View {
     
     // Difficulty filter settings
     let difficultyList = ["All", "Beginner", "Intermediate", "Advanced", "Professional"]
-    @State private var diffilcutyType = "All"
+    @State private var diffilcultyType = "All"
     
     // Wave size filter settings
     let waveSizeList = ["All", "Knee", "Head", "Overhead", "Double+"]
@@ -85,7 +85,7 @@ struct FilterSheetView: View {
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                FilterFieldView(pickerName: "Difficulty", selectedValue: diffilcutyType, valuesArray: difficultyList)
+                FilterFieldView(pickerName: "Difficulty", selectedValue: diffilcultyType, valuesArray: difficultyList)
                 
                 FilterFieldView(pickerName: "Wave size", selectedValue: waveSizeType, valuesArray: waveSizeList)
                 
@@ -95,6 +95,7 @@ struct FilterSheetView: View {
                     
             Button {
                 dismiss()
+                filteredOptions = [selectedBrand, boardType, selectedMaterial, selectedFinType, diffilcultyType, waveSizeType, wavePowerType]
             } label: {
                 Image(systemName: "checkmark.circle")
                 Text("Apply filters")
