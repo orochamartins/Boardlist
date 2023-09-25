@@ -31,7 +31,8 @@ struct Boards: Codable, Identifiable {
         return total / userReview.count
     }
     
-    struct UserReview: Codable {
+    struct UserReview: Codable, Identifiable {
+        let id: Int
         let rating: Int
         let location: String
         let description: String

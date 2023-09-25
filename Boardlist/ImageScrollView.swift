@@ -12,20 +12,23 @@ struct ImageScrollView: View {
     let board: Boards
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack (spacing: 16) {
-                    ForEach(board.photos, id: \.self) { photo in
-                        Image(photo)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geo.size.width * 0.9, height: 250)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+        VStack {
+            GeometryReader { geo in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack (spacing: 16) {
+                        ForEach(board.photos, id: \.self) { photo in
+                            Image(photo)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width * 0.9, height: 250)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
                     }
+                    .padding(.top, 16)
                 }
-                .padding(.top, 16)
             }
         }
+        .frame(height: 266)
     }
 }
 
