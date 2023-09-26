@@ -33,6 +33,7 @@ struct ReviewsScrollView: View {
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
                         }
                     }
+                    .padding(.horizontal)
                 }
             }
         }

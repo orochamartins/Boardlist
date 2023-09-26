@@ -19,7 +19,7 @@ struct BoardDetailView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     ImageScrollView(board: board)
-                    
+                    VStack {
                     VStack(alignment: .leading, spacing: 14) {
                         VStack(alignment: .leading) {
                             HStack(alignment: .top) {
@@ -111,6 +111,85 @@ struct BoardDetailView: View {
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
                     .padding(.bottom, 8)
                     
+                        Group {
+                            
+                            Text("Specifications:")
+                                .font(.footnote)
+                                .opacity(0.5)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.horizontal, .top])
+                            
+                            VStack(alignment: .leading) {
+                                VStack {
+                                    HStack {
+                                        Text("Board type")
+                                            .font(.headline)
+                                        Spacer()
+                                        Text(board.boardType)
+                                    }
+                                    Divider()
+                                    HStack {
+                                        Text("Material")
+                                            .font(.headline)
+                                        Spacer()
+                                        Text(board.material)
+                                    }
+                                    Divider()
+                                    HStack {
+                                        Text("Fin system")
+                                            .font(.headline)
+                                        Spacer()
+                                        Text(board.finSystem)
+                                    }
+                                    Divider()
+                                    HStack {
+                                        Text("Fin type")
+                                            .font(.headline)
+                                        Spacer()
+                                        Text(board.finType)
+                                    }
+                                    Divider()
+                                    HStack {
+                                        Text("Tail type")
+                                            .font(.headline)
+                                        Spacer()
+                                        Text(board.tailType)
+                                    }
+                                }
+                                .foregroundColor(.white.opacity(0.5))
+                                .padding()
+                            }
+                            .background(.thinMaterial.opacity(0.6))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
+                            .padding(.bottom, 8)
+                            
+                            Text("Sizes:")
+                                .font(.footnote)
+                                .opacity(0.5)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.horizontal, .top])
+                            
+                            VStack(alignment: .leading) {
+                                VStack(alignment: .leading) {
+                                    ForEach(board.size, id: \.self) {
+                                        Text($0)
+                                            .foregroundColor(.white.opacity(0.5))
+                                        if board.size.firstIndex(of: $0) != board.size.count - 1 {
+                                            Divider()
+                                        }
+                                    }
+                                }
+                                .padding()
+                            }
+                            .background(.thinMaterial.opacity(0.6))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial))
+                            .padding(.bottom, 8)
+                        }
+                    }
+                    .padding(.horizontal)
+                    
                     Text("Reviews:")
                         .font(.footnote)
                         .opacity(0.5)
@@ -118,21 +197,7 @@ struct BoardDetailView: View {
                         .padding([.horizontal, .top])
                     
                     ReviewsScrollView(board: board)
-                    
-                    Text("Sizes:")
-                        .font(.footnote)
-                        .opacity(0.5)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.horizontal, .top])
-                    
-                    VStack(alignment: .leading) {
-                        ForEach(board.size, id: \.self) {
-                            Text($0)
-                            Divider()
-                        }
-                    }
                 }
-                .padding(.horizontal)
             }
         }
         .navigationTitle(board.model)

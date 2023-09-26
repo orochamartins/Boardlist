@@ -20,10 +20,11 @@ struct ImageScrollView: View {
                             Image(photo)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: geo.size.width * 0.9, height: 250)
+                                .frame(width: geo.size.width * 0.85, height: 250)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
+                    .padding(.horizontal)
                     .padding(.top, 16)
                 }
             }

@@ -280,7 +280,7 @@ struct InnerHeightPreferenceKey: PreferenceKey {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let filteredOptions = ["Lane", "All", "Epoxy", "All", "All", "All", "All"]
+        let filteredOptions = ["All", "All", "All", "All", "All", "All", "All"]
         ContentView(filteredOptions: .constant(filteredOptions))
     }
 }

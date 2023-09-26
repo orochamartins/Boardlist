@@ -30,7 +30,7 @@ struct FilterFieldView: View {
             }
             .frame(minHeight: 48)
             .padding(.horizontal)
-            .background(.ultraThinMaterial)
+            .background(.thinMaterial.opacity(0.6))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
             RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
