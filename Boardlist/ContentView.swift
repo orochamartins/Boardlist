@@ -13,8 +13,9 @@ struct ContentView: View {
     let columns = [GridItem(.adaptive(minimum: 300))]
     
     @StateObject var favourites = Favourites()
+    @ObservedObject var filters: Filters
+    
     @State private var searchText = ""
-    @Binding var filteredOptions: [String]
     
     // property for the segmented control
     @State private var isFavourited = false
@@ -29,12 +30,12 @@ struct ContentView: View {
     var searchResults: [Boards] {
         let segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
         
-        if searchText.isEmpty && filteredOptions.allSatisfy({$0 == "All"}) {
+        if searchText.isEmpty && filters.filteredOptions.allSatisfy({$0 == "All"}) {
             return segmentedBoards
             
-        } else if searchText.isEmpty && !filteredOptions.allSatisfy({$0 == "All"}) {
+        } else if searchText.isEmpty && !filters.filteredOptions.allSatisfy({$0 == "All"}) {
             return segmentedBoards.filter { item in
-                filteredOptions.contains { option in
+                filters.filteredOptions.contains { option in
                     item.brand.localizedCaseInsensitiveContains(option)
                     || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
                 }
@@ -42,7 +43,7 @@ struct ContentView: View {
                 
         } else {
             return segmentedBoards.filter { item in
-                filteredOptions.contains { option in
+                filters.filteredOptions.contains { option in
                     item.brand.localizedCaseInsensitiveContains(searchText) || item.model.localizedCaseInsensitiveContains(searchText) || item.material.localizedCaseInsensitiveContains(searchText) || item.finType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.tailType.localizedCaseInsensitiveContains(searchText) || item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
                 }
             }
@@ -256,7 +257,7 @@ struct ContentView: View {
         }
         .environmentObject(favourites)
         .sheet(isPresented: $isFiltersActive) {
-            FilterSheetView()
+            FilterSheetView(filters: filters)
                 .overlay {
                     GeometryReader { geometry in
                         Color.clear.preference(key: InnerHeightPreferenceKey.self, value: geometry.size.height)
@@ -280,7 +281,6 @@ struct InnerHeightPreferenceKey: PreferenceKey {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let filteredOptions = ["All", "All", "All", "All", "All", "All", "All"]
-        ContentView(filteredOptions: .constant(filteredOptions))
+        ContentView(filters: Filters())
     }
 }

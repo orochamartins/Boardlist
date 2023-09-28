@@ -10,35 +10,7 @@ import SwiftUI
 struct FilterSheetView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State private var filteredOptions = ["All", "All", "All", "All", "All", "All", "All"]
-    
-    // Brand filter settings
-    let brandList = ["All", "Chris Christenson", "Album", "Channel Islands", "Sharpeye"]
-    @State private var selectedBrand = "All"
-    
-    // Material filter settings
-    let materialList = ["All", "Soft-top", "Wood", "Polyurethane", "Epoxy"]
-    @State private var selectedMaterial = "All"
-    
-    // Fin type filter settings
-    let finTypeList = ["All", "Thruster", "Quad", "Twin", "Bonzer", "Single", "2+1", "1+2"]
-    @State private var selectedFinType = "All"
-    
-    // Difficulty filter settings
-    let difficultyList = ["All", "Beginner", "Intermediate", "Advanced", "Professional"]
-    @State private var diffilcultyType = "All"
-    
-    // Wave size filter settings
-    let waveSizeList = ["All", "Knee", "Head", "Overhead", "Double+"]
-    @State private var waveSizeType = "All"
-    
-    // Wave power filter settings
-    let wavePowerList = ["All", "Weak", "Medium", "Strong", "Barrels"]
-    @State private var wavePowerType = "All"
-    
-    // Board type filter settings
-    let boardTypeList = ["All", "Funboard", "Fish", "Shortboard", "Midlength", "Longboard", "Gun"]
-    @State private var boardType = "All"
+    @StateObject var filters: Filters
     
     var body: some View {
         ZStack {
@@ -53,7 +25,7 @@ struct FilterSheetView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                     
                     Button("Clear") {
-                        selectedBrand = "All"
+                        filters.clear()
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -65,9 +37,9 @@ struct FilterSheetView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    FilterFieldView(pickerName: "Brand", selectedValue: selectedBrand, valuesArray: brandList)
+                    FilterFieldView(pickerName: "Brand", selectedValue: filters.selectedBrand, valuesArray: filters.brandList)
                     
-                    FilterFieldView(pickerName: "Type", selectedValue: boardType, valuesArray: boardTypeList)
+                    FilterFieldView(pickerName: "Type", selectedValue: filters.boardType, valuesArray: filters.boardTypeList)
                 }
                 
                 VStack {
@@ -76,9 +48,9 @@ struct FilterSheetView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    FilterFieldView(pickerName: "Material", selectedValue: selectedMaterial, valuesArray: materialList)
+                    FilterFieldView(pickerName: "Material", selectedValue: filters.selectedMaterial, valuesArray: filters.materialList)
                     
-                    FilterFieldView(pickerName: "Fins", selectedValue: selectedFinType, valuesArray: finTypeList)
+                    FilterFieldView(pickerName: "Fins", selectedValue: filters.selectedFinType, valuesArray: filters.finTypeList)
                     
                 }
                 
@@ -89,17 +61,17 @@ struct FilterSheetView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    FilterFieldView(pickerName: "Difficulty", selectedValue: diffilcultyType, valuesArray: difficultyList)
+                    FilterFieldView(pickerName: "Difficulty", selectedValue: filters.diffilcultyType, valuesArray: filters.difficultyList)
                     
-                    FilterFieldView(pickerName: "Wave size", selectedValue: waveSizeType, valuesArray: waveSizeList)
+                    FilterFieldView(pickerName: "Wave size", selectedValue: filters.waveSizeType, valuesArray: filters.waveSizeList)
                     
-                    FilterFieldView(pickerName: "Wave power", selectedValue: wavePowerType, valuesArray: wavePowerList)
+                    FilterFieldView(pickerName: "Wave power", selectedValue: filters.wavePowerType, valuesArray: filters.wavePowerList)
                 }
                 
                 
                 Button {
                     dismiss()
-                    filteredOptions = [selectedBrand, boardType, selectedMaterial, selectedFinType, diffilcultyType, waveSizeType, wavePowerType]
+                    filters.apply()
                 } label: {
                     Image(systemName: "checkmark.circle")
                     Text("Apply filters")
@@ -119,7 +91,7 @@ struct FilterSheetView: View {
 
 struct FilterSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterSheetView()
+        FilterSheetView(filters: Filters())
             .preferredColorScheme(.dark)
     }
 }
