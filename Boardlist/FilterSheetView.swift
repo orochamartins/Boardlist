@@ -37,9 +37,9 @@ struct FilterSheetView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    FilterFieldView(pickerName: "Brand", selectedValue: filters.selectedBrand, valuesArray: filters.brandList)
+                    FilterFieldView(pickerName: "Brand", selectedValue: $filters.selectedBrand, valuesArray: filters.brandList)
                     
-                    FilterFieldView(pickerName: "Type", selectedValue: filters.boardType, valuesArray: filters.boardTypeList)
+                    FilterFieldView(pickerName: "Type", selectedValue: $filters.boardType, valuesArray: filters.boardTypeList)
                 }
                 
                 VStack {
@@ -48,9 +48,9 @@ struct FilterSheetView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    FilterFieldView(pickerName: "Material", selectedValue: filters.selectedMaterial, valuesArray: filters.materialList)
+                    FilterFieldView(pickerName: "Material", selectedValue: $filters.selectedMaterial, valuesArray: filters.materialList)
                     
-                    FilterFieldView(pickerName: "Fins", selectedValue: filters.selectedFinType, valuesArray: filters.finTypeList)
+                    FilterFieldView(pickerName: "Fins", selectedValue: $filters.selectedFinType, valuesArray: filters.finTypeList)
                     
                 }
                 
@@ -61,11 +61,11 @@ struct FilterSheetView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    FilterFieldView(pickerName: "Difficulty", selectedValue: filters.diffilcultyType, valuesArray: filters.difficultyList)
+                    FilterFieldView(pickerName: "Difficulty", selectedValue: $filters.diffilcultyType, valuesArray: filters.difficultyList)
                     
-                    FilterFieldView(pickerName: "Wave size", selectedValue: filters.waveSizeType, valuesArray: filters.waveSizeList)
+                    FilterFieldView(pickerName: "Wave size", selectedValue: $filters.waveSizeType, valuesArray: filters.waveSizeList)
                     
-                    FilterFieldView(pickerName: "Wave power", selectedValue: filters.wavePowerType, valuesArray: filters.wavePowerList)
+                    FilterFieldView(pickerName: "Wave power", selectedValue: $filters.wavePowerType, valuesArray: filters.wavePowerList)
                 }
                 
                 
