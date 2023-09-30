@@ -44,7 +44,7 @@ struct ContentView: View {
         } else {
             return segmentedBoards.filter { item in
                 filters.filteredOptions.contains { option in
-                    item.brand.localizedCaseInsensitiveContains(searchText) || item.model.localizedCaseInsensitiveContains(searchText) || item.material.localizedCaseInsensitiveContains(searchText) || item.finType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.tailType.localizedCaseInsensitiveContains(searchText) || item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
+                    item.brand.localizedCaseInsensitiveContains(searchText) || item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(searchText) ||  item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(searchText) ||  item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(searchText) ||  item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(searchText) ||  item.tailType.localizedCaseInsensitiveContains(option)
                 }
             }
         }
@@ -57,6 +57,8 @@ struct ContentView: View {
                 
                 if isFavourited && favourites.isEmpty() {
                     EmptyFavouritesView()
+                } else if searchResults.isEmpty {
+                    EmptySearchView()
                 }
                 
                     ScrollView {

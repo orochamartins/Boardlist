@@ -13,31 +13,31 @@ class Filters: ObservableObject {
     
     // Brand filter settings
     let brandList = ["All", "Chris Christenson", "Album", "Channel Islands", "Sharpeye"]
-    var selectedBrand = "All"
+    @Published var selectedBrand = "All"
     
     // Material filter settings
     let materialList = ["All", "Soft-top", "Wood", "Polyurethane", "Epoxy"]
-    var selectedMaterial = "All"
+    @Published var selectedMaterial = "All"
     
     // Fin type filter settings
     let finTypeList = ["All", "Thruster", "Quad", "Twin", "Bonzer", "Single", "2+1", "1+2"]
-    var selectedFinType = "All"
+    @Published var selectedFinType = "All"
     
     // Difficulty filter settings
     let difficultyList = ["All", "Beginner", "Intermediate", "Advanced", "Professional"]
-    var diffilcultyType = "All"
+    @Published var diffilcultyType = "All"
     
     // Wave size filter settings
     let waveSizeList = ["All", "Knee", "Head", "Overhead", "Double+"]
-    var waveSizeType = "All"
+    @Published var waveSizeType = "All"
     
     // Wave power filter settings
     let wavePowerList = ["All", "Weak", "Medium", "Strong", "Barrels"]
-    var wavePowerType = "All"
+    @Published var wavePowerType = "All"
     
     // Board type filter settings
     let boardTypeList = ["All", "Funboard", "Fish", "Shortboard", "Midlength", "Longboard", "Gun"]
-    var boardType = "All"
+    @Published var boardType = "All"
     
     // Apply filters function
     func apply() {
@@ -57,5 +57,4 @@ class Filters: ObservableObject {
         boardType = "All"
         filteredOptions = ["All"]
     }
-    
 }
