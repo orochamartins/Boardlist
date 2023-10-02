@@ -28,26 +28,35 @@ struct ContentView: View {
     @FocusState private var searchFieldIsFocused: Bool
     
     var searchResults: [Boards] {
-        let segmentedBoards = isFavourited ? boards.filter{favourites.contains($0)} : boards
         
-        if searchText.isEmpty && filters.filteredOptions.allSatisfy({$0 == "All"}) {
-            return segmentedBoards
-            
-        } else if searchText.isEmpty && !filters.filteredOptions.allSatisfy({$0 == "All"}) {
-            return segmentedBoards.filter { item in
-                filters.filteredOptions.contains { option in
-                    item.brand.localizedCaseInsensitiveContains(option)
-                    || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
-                }
-            }
-                
-        } else {
-            return segmentedBoards.filter { item in
-                filters.filteredOptions.contains { option in
-                    item.brand.localizedCaseInsensitiveContains(searchText) || item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(searchText) ||  item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(searchText) ||  item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(searchText) ||  item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(searchText) ||  item.tailType.localizedCaseInsensitiveContains(option)
+        var searchedBoards: [Boards] {
+            if searchText.isEmpty {
+                return boards
+            } else {
+                return boards.filter { item in
+                    item.brand.localizedCaseInsensitiveContains(searchText) || item.model.localizedCaseInsensitiveContains(searchText) || item.material.localizedCaseInsensitiveContains(searchText) || item.finType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.tailType.localizedCaseInsensitiveContains(searchText)
                 }
             }
         }
+        
+        var filteredBoards: [Boards] {
+            if filters.filteredOptions.allSatisfy({$0 == "All"}) {
+                return searchedBoards
+            } else {
+                return searchedBoards.filter { item in
+                    filters.filteredOptions.contains { option in
+                        item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
+                    }
+                }
+            }
+        }
+        
+        let finalBoards = isFavourited ? filteredBoards.filter{favourites.contains($0)} : filteredBoards
+        
+        return finalBoards.sorted {
+            $0.model < $1.model
+        }
+        
     }
     
     var body: some View {
@@ -242,8 +251,17 @@ struct ContentView: View {
                             Button {
                                 isFiltersActive = true
                             } label: {
-                                Image(systemName: "slider.horizontal.3")
-                                    .foregroundColor(.white)
+                                ZStack {
+                                    Image(systemName: "slider.horizontal.3")
+                                        .foregroundColor(.white)
+                                    if !filters.filteredOptions.allSatisfy({$0 == "All"}) {
+                                        Circle()
+                                            .fill(.blue)
+                                            .frame(width: 16, height: 16)
+                                            .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 2)
+                                            .offset(x: 16, y: -16)
+                                    }
+                                }
                             }
                             .font(.largeTitle)
                         }

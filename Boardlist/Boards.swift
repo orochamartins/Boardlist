@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Boards: Codable, Identifiable {
+struct Boards: Codable, Identifiable{
+    
     let id: Int
     let brand: String
     let model: String
@@ -37,5 +38,4 @@ struct Boards: Codable, Identifiable {
         let location: String
         let description: String
     }
-    
 }
