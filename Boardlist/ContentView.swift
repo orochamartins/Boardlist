@@ -60,6 +60,7 @@ struct ContentView: View {
     }
     
     var body: some View {
+        
         NavigationView {
             ZStack {
                 LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1))], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
@@ -70,8 +71,17 @@ struct ContentView: View {
                     EmptySearchView()
                 }
                 
-                    ScrollView {
-                        LazyVGrid(columns: columns) {
+                ScrollView(showsIndicators: false) {
+                        
+                        // Start of Logo and Searchbar
+                        VStack {
+                            HStack {
+                                Image("boardlistLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                            .frame(width: 140)
+                            .padding(.bottom, 12)
                             
                             HStack{
                                 ZStack {
@@ -109,6 +119,14 @@ struct ContentView: View {
                                     .padding(.vertical, 2)
                                 }
                             }
+                        }
+                        .padding(.top, getSafeAreaTop())
+                        .padding(.horizontal)
+                        .padding(.bottom)
+                        .background(LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .top, endPoint: .bottom))
+                        // End of Logo and Searchbar
+                        
+                        LazyVGrid(columns: columns) {
                             
                             ForEach(searchResults) { board in
                                 NavigationLink {
@@ -209,14 +227,6 @@ struct ContentView: View {
                         }
                         .padding([.horizontal, .bottom])
                     }
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            HStack {
-                                Image(systemName: "triangle")
-                                Text("Boardlist")
-                            }
-                        }
-                    }
                     .preferredColorScheme(.dark)
                     .navigationBarTitleDisplayMode(.inline)
                 
@@ -224,7 +234,7 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     VStack {
-                        LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .bottom, endPoint: .top).ignoresSafeArea()
+                        LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .bottom, endPoint: .top)
                     }
                     .frame(height: 70)
                 }
@@ -272,8 +282,9 @@ struct ContentView: View {
                     .clipShape(Capsule())
                     .overlay(Capsule().stroke(.ultraThinMaterial))
                 }
-                .padding(.bottom, 8)
+                .padding(.bottom, 32)
             }
+            .ignoresSafeArea()
         }
         .environmentObject(favourites)
         .sheet(isPresented: $isFiltersActive) {
@@ -290,6 +301,19 @@ struct ContentView: View {
                 .presentationDragIndicator(.visible)
         }
     }
+    
+    func getSafeAreaTop() -> CGFloat {
+        let keyWindow = UIApplication.shared.connectedScenes
+        
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+        
+        return keyWindow?.safeAreaInsets.top ?? 0
+    }
+    
 }
 
 struct InnerHeightPreferenceKey: PreferenceKey {
