@@ -17,6 +17,9 @@ struct ContentView: View {
     
     @State private var searchText = ""
     
+    // property to store top bar height
+    @State private var topBarSize = 158
+    
     // property for the segmented control
     @State private var isFavourited = false
     
@@ -72,59 +75,6 @@ struct ContentView: View {
                 }
                 
                 ScrollView(showsIndicators: false) {
-                        
-                        // Start of Logo and Searchbar
-                        VStack {
-                            HStack {
-                                Image("boardlistLogo")
-                                    .resizable()
-                                    .scaledToFit()
-                            }
-                            .frame(width: 140)
-                            .padding(.bottom, 12)
-                            
-                            HStack{
-                                ZStack {
-                                    HStack {
-                                        Image(systemName: "magnifyingglass")
-                                            .foregroundColor(.gray)
-                                        TextField("Find your board here", text: $searchText)
-                                            .focused($searchFieldIsFocused)
-                                        
-                                        if searchText != "" {
-                                            Spacer()
-                                            Button {
-                                                searchText = ""
-                                            } label: {
-                                                Image(systemName: "xmark.circle.fill")
-                                                    .foregroundColor(.gray)
-                                            }
-                                        }
-                                    }
-                                    .padding(8)
-                                    .background(.thinMaterial.opacity(0.6))
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    
-                                    RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
-                                        .allowsHitTesting(false)
-                                }
-                                .padding(.bottom, 8)
-                                
-                                if searchFieldIsFocused {
-                                    Button("Cancel") {
-                                        searchFieldIsFocused = false
-                                        searchText = ""
-                                    }
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 2)
-                                }
-                            }
-                        }
-                        .padding(.top, getSafeAreaTop())
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                        .background(LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .top, endPoint: .bottom))
-                        // End of Logo and Searchbar
                         
                         LazyVGrid(columns: columns) {
                             
@@ -225,6 +175,7 @@ struct ContentView: View {
                                 }
                             }
                         }
+                        .padding(.top, CGFloat(topBarSize))
                         .padding([.horizontal, .bottom])
                     }
                     .preferredColorScheme(.dark)
@@ -283,6 +234,71 @@ struct ContentView: View {
                     .overlay(Capsule().stroke(.ultraThinMaterial))
                 }
                 .padding(.bottom, 32)
+                
+                VStack {
+                    VStack {
+                        HStack {
+                            Image("boardlistLogo")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        .frame(width: 140)
+                        .padding(.bottom, 12)
+                        
+                        HStack{
+                            ZStack {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                        .foregroundColor(.gray)
+                                    TextField("Find your board here", text: $searchText)
+                                        .focused($searchFieldIsFocused)
+                                    
+                                    if searchText != "" {
+                                        Spacer()
+                                        Button {
+                                            searchText = ""
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
+                                }
+                                .padding(8)
+                                .background(.thinMaterial.opacity(0.6))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                
+                                RoundedRectangle(cornerRadius: 10).stroke(.ultraThinMaterial)
+                                    .allowsHitTesting(false)
+                                    .frame(height: 40)
+                            }
+                            .padding(.bottom, 8)
+                            
+                            if searchFieldIsFocused {
+                                Button("Cancel") {
+                                    searchFieldIsFocused = false
+                                    searchText = ""
+                                }
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                            }
+                        }
+                    }
+                    .padding(.top, getSafeAreaTop())
+                    .padding(.horizontal)
+                    .padding(.bottom)
+                    .overlay {
+                        GeometryReader { geometry in
+                            Rectangle()
+                                .stroke(Color.clear)
+                                .onAppear{
+                                    topBarSize = Int(geometry.size.height + 6)
+                                }
+                        }
+                    }
+                    
+                    Spacer()
+                }
+                //.background(LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .top, endPoint: .bottom))
             }
             .ignoresSafeArea()
         }
