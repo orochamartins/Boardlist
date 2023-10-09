@@ -17,6 +17,12 @@ struct ContentView: View {
     
     @State private var searchText = ""
     
+    // property to check scroll position
+    @State private var scrollPosition: CGPoint = .zero
+    
+    // property to check scroll changes
+    @State private var hasScrolled = false
+    
     // property to store top bar height
     @State private var topBarSize = 158
     
@@ -175,11 +181,26 @@ struct ContentView: View {
                                 }
                             }
                         }
+                        .background(GeometryReader { geometry in
+                            Color.clear.preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin)
+                        })
+                        .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                            self.scrollPosition = value
+                        }
                         .padding(.top, CGFloat(topBarSize))
                         .padding([.horizontal, .bottom])
+                        .padding(.bottom, 88)
                     }
                     .preferredColorScheme(.dark)
                     .navigationBarTitleDisplayMode(.inline)
+                    .coordinateSpace(name: "scroll")
+                    .onChange(of: scrollPosition.y) { value in
+                        if value < CGFloat(topBarSize) - 32 {
+                            hasScrolled = true
+                        } else {
+                            hasScrolled = false
+                        }
+                    }
                 
                 // Small bottom gradient behind toolbar
                 VStack {
@@ -237,13 +258,16 @@ struct ContentView: View {
                 
                 VStack {
                     VStack {
-                        HStack {
-                            Image("boardlistLogo")
-                                .resizable()
-                                .scaledToFit()
+                        if !hasScrolled {
+                            HStack {
+                                Image("boardlistLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                            .frame(width: 140)
+                            .padding(.bottom, 12)
                         }
-                        .frame(width: 140)
-                        .padding(.bottom, 12)
+                        
                         
                         HStack{
                             ZStack {
@@ -271,7 +295,7 @@ struct ContentView: View {
                                     .allowsHitTesting(false)
                                     .frame(height: 40)
                             }
-                            .padding(.bottom, 8)
+                            .padding(.bottom, 16)
                             
                             if searchFieldIsFocused {
                                 Button("Cancel") {
@@ -285,7 +309,9 @@ struct ContentView: View {
                     }
                     .padding(.top, getSafeAreaTop())
                     .padding(.horizontal)
-                    .padding(.bottom)
+                    .padding(.bottom, 8)
+                    .background(hasScrolled ? Color(#colorLiteral(red: 0, green: 0.03120037355, blue: 0.04797770083, alpha: 1)) : Color.clear)
+                    .overlay(BottomBorder().stroke(hasScrolled ? Color.white.opacity(0.1) : Color.clear, lineWidth: 1.5))
                     .overlay {
                         GeometryReader { geometry in
                             Rectangle()
@@ -298,7 +324,7 @@ struct ContentView: View {
                     
                     Spacer()
                 }
-                //.background(LinearGradient(colors: [Color(#colorLiteral(red: 0, green: 0.08004814165, blue: 0.1161996114, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.02060918883, blue: 0.02991674364, alpha: 0))], startPoint: .top, endPoint: .bottom))
+                .animation(.easeInOut, value: hasScrolled)
             }
             .ignoresSafeArea()
         }
@@ -330,6 +356,24 @@ struct ContentView: View {
         return keyWindow?.safeAreaInsets.top ?? 0
     }
     
+}
+
+struct BottomBorder: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        
+        return path
+    }
+}
+
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGPoint = .zero
+    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+        
+    }
 }
 
 struct InnerHeightPreferenceKey: PreferenceKey {
