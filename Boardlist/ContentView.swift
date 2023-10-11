@@ -97,9 +97,11 @@ struct ContentView: View {
                                             HStack(alignment: .top) {
                                                 HStack{
                                                     ZStack {
-                                                        RoundedRectangle(cornerRadius: 8)
-                                                            .fill(.blue)
+                                                        Image(board.image)
+                                                            .resizable()
+                                                            .scaledToFill()
                                                             .frame(width: 100, height: 100)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 8))
                                                             .padding(.top)
                                                             .padding(.trailing, 8)
                                                         
