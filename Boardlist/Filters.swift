@@ -36,7 +36,7 @@ class Filters: ObservableObject {
     @Published var wavePowerType = "All"
     
     // Board type filter settings
-    let boardTypeList = ["All", "Fun", "Fish", "Short", "Mid", "Long", "Gun"]
+    let boardTypeList = ["All", "Fun", "Fish", "Hybrid", "Short", "Mid", "Long", "Gun"]
     @Published var boardType = "All"
     
     // Apply filters function

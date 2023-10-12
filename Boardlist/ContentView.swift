@@ -43,7 +43,10 @@ struct ContentView: View {
                 return boards
             } else {
                 return boards.filter { item in
-                    item.brand.localizedCaseInsensitiveContains(searchText) || item.model.localizedCaseInsensitiveContains(searchText) || item.material.localizedCaseInsensitiveContains(searchText) || item.finType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.tailType.localizedCaseInsensitiveContains(searchText)
+                    item.brand.localizedCaseInsensitiveContains(searchText) || item.model.localizedCaseInsensitiveContains(searchText) || item.material.localizedCaseInsensitiveContains(searchText) || item.finType.localizedCaseInsensitiveContains(searchText) || item.boardType.localizedCaseInsensitiveContains(searchText) || item.tailType.localizedCaseInsensitiveContains(searchText) ||
+                        item.difficultyArray.joined(separator: ", ").localizedCaseInsensitiveContains(searchText) ||
+                        item.waveRangeArray.joined(separator: ", ").localizedCaseInsensitiveContains(searchText) ||
+                        item.powerRangeArray.joined(separator: ", ").localizedCaseInsensitiveContains(searchText)
                 }
             }
         }
@@ -54,7 +57,10 @@ struct ContentView: View {
             } else {
                 return searchedBoards.filter { item in
                     filters.filteredOptions.contains { option in
-                        item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option)
+                        item.brand.localizedCaseInsensitiveContains(option) || item.model.localizedCaseInsensitiveContains(option) || item.material.localizedCaseInsensitiveContains(option) || item.finType.localizedCaseInsensitiveContains(option) || item.boardType.localizedCaseInsensitiveContains(option) || item.tailType.localizedCaseInsensitiveContains(option) ||
+                            item.difficultyArray.joined(separator: ", ").localizedCaseInsensitiveContains(option) ||
+                        item.waveRangeArray.joined(separator: ", ").localizedCaseInsensitiveContains(option) ||
+                        item.powerRangeArray.joined(separator: ", ").localizedCaseInsensitiveContains(option)
                     }
                 }
             }

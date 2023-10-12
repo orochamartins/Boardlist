@@ -46,7 +46,7 @@ struct ReviewsScrollView_Previews: PreviewProvider {
         
         let boards: [Boards] = Bundle.main.decode("boards.json")
         
-        ReviewsScrollView(board: boards[0])
+        ReviewsScrollView(board: boards[1])
             .preferredColorScheme(.dark)
     }
 }
