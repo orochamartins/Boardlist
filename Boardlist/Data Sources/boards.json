@@ -232,5 +232,83 @@
             "description": "Think i needed to size it up a little. But good board overall."
         
         }]
+  },
+  {
+    "id": 7,
+    "brand": "Album",
+    "model": "Twinsman",
+    "image": "AlbumTwinsman_Main",
+    "photos": ["AlbumTwinsman_1", "AlbumTwinsman_2", "AlbumTwinsman_3"],
+    "description": "User friendly speed, easy turns, and more waves without sacrificing performance. Approachable for any style of surfing. A board that you can really push on rail or just enjoy the easy down the line speed. Paddles and gets up to speed faster than a standard performance board, but doesn’t have the limitations of a traditional twin.",
+    "size": ["5’00 x 18.75 x 2 = 23L", "5’2 x 19 x 2.13 = 25.3L", "5’3 x 19.13 x 2.18 = 26.6L", "5’4 x 19.25 x 2.25 = 27.9L", "5’5 x 19.38 x 2.3 = 29L", "5’6 x 19.5 x 2.32 = 30L", "5’7 x 19.63 x 2.35 = 31L", "5’8 x 19.75 x 2.38 = 32L", "5’9 x 19.88 x 2.4 = 33.4L", "5’10 x 20 x 2.44 = 34.4L", "5’11 x 20.25 x 2.48 = 36L", "6’0 x 20.5 x 2.5 = 37.3L", "6’2 x 21 x 2.63 = 40.4L", "6’4 x 21.5 x 2.75 = 43.9L"],
+    "material": "Polyurethane",
+    "finSystem": "FCS, Futures",
+    "finType": "Twin",
+    "boardType": "Hybrid",
+    "tailType": "Swallow, Pin, Squashed",
+    "difficulty": [2, 4],
+    "waveRange": [2, 3],
+    "powerRange": [2, 3],
+    "userReview": [
+        {
+            "id": 17,
+            "rating": 4,
+            "location": "Byron Bay, Australia",
+            "description": "Awesome board! Really fast but without losing control."
+            
+        },
+        {
+            "id": 18,
+            "rating": 5,
+            "location": "Vila do Conde, Portugal",
+            "description": "Best small wave board i ever had! Hope it never breaks."
+            
+        },
+        {
+            "id": 19,
+            "rating": 3,
+            "location": "Peniche, Portugal",
+            "description": "Think i needed to size it up a little. But good board overall."
+        
+        }]
+  },
+  {
+    "id": 8,
+    "brand": "Album",
+    "model": "Plasmic",
+    "image": "AlbumPlasmic_Main",
+    "photos": ["AlbumPlasmic_1", "AlbumPlasmic_2", "AlbumPlasmic_3"],
+    "description": "Chunky outline with a fish entry. Instead of a swallow, the diamond tail allows your foot to be set further back to get more drive out of the shorter rail-line. Flat deck profile with a low apex rail, making it a great paddler with easy rail-engagement.",
+    "size": ["4’10 x 19.5 x 2.25 = 26.5L", "4’11 x 19.63 x 2.3 = 27.5L", "5’0 x 19.75 x 2.32 = 28.5L", "5’1 x 19.88 x 2.35 = 29.4L", "5’2 x 20 x 2.38 = 30.5L", "5’3 x 20.13 x 2.4 = 31.6L", "5’4 x 20.25 x 2.44 = 32.7L", "5’5 x 20.38 x 2.48 = 33.8L", "5’6 x 20.5 x 2.5 = 34.8L", "5’7 x 20.63 x 2.56 = 36.4L", "5’8 x 20.75 x 2.63 = 38.2L", "5’10 x 21 x 2.68 = 40.7L", "6’0 x 22 x 2.75 = 44.8L", "6’2 x 22 x 2.75 = 47L"],
+    "material": "Polyurethane",
+    "finSystem": "FCS, Futures",
+    "finType": "Twin",
+    "boardType": "Hybrid",
+    "tailType": "Diamond",
+    "difficulty": [1, 3],
+    "waveRange": [1, 2],
+    "powerRange": [1, 2],
+    "userReview": [
+        {
+            "id": 20,
+            "rating": 4,
+            "location": "Byron Bay, Australia",
+            "description": "Awesome board! Really fast but without losing control."
+            
+        },
+        {
+            "id": 21,
+            "rating": 5,
+            "location": "Vila do Conde, Portugal",
+            "description": "Best small wave board i ever had! Hope it never breaks."
+            
+        },
+        {
+            "id": 22,
+            "rating": 3,
+            "location": "Peniche, Portugal",
+            "description": "Think i needed to size it up a little. But good board overall."
+        
+        }]
   }
 ]
